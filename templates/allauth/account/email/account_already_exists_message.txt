@@ -1,13 +1,9 @@
-{% extends "account/email/base_message.txt" %}
-{% load i18n %}
+{% load account %}{% user_display user as user_display %}{% load i18n %}{% autoescape off %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Hello from {{ site_name }}!
 
-{% block content %}{% autoescape off %}{% blocktrans %}You are receiving this e-mail because you or someone else tried to signup for an
-account using e-mail address:
+You're receiving this e-mail because user {{ user_display }} has given yours as an e-mail address to connect their account.
 
-{{ email }}
-
-However, an account using that e-mail address already exists.  In case you have
-forgotten about this, please use the password forgotten procedure to recover
-your account:
-
-{{ password_reset_url }}{% endblocktrans %}{% endautoescape %}{% endblock %}
+To confirm this is correct, go to {{ activate_url }}
+{% endblocktrans %}
+{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Thank you from {{ site_name }}!
+{{ site_domain }}{% endblocktrans %}
+{% endautoescape %}
